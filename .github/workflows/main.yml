@@ -1,0 +1,25 @@
+name: Run Test Cases
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-11-jdk  
+
+      - name: Install Dependencies
+        run: |
+          ./gradlew build  
+
+      - name: Run Tests
+        run: |
+          ./gradlew test 
